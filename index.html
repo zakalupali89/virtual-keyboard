@@ -6,222 +6,226 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <script type="module" src="index.js"></script>
   <title>Document</title>
 </head>
 <body class="board">
-<textarea class="board__text-area"></textarea>
-<div class="board__content">
-  <button class="button-key button-key_theme_dark" id="Backquote">
-    <span class="button-key__up-name">~</span>
-    <span class="button-key__text">`</span>
-  </button>
-  <button class="button-key" id="Digit1">
-    <span class="button-key__up-name">!</span>
-    <span class="button-key__text">1</span>
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">@</span>
-    2
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">#</span>
-    3
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">$</span>
-    4
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">%</span>
-    5
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">:</span>
-    6
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">?</span>
-    7
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">*</span>
-    8
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">(</span>
-    9
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">)</span>
-    0
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">_</span>
-    -
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">+</span>
-    =
-  </button>
-  <button class="button-key button-key_theme_dark button-key_long">Backspace</button>
-  <button class="button-key button-key_theme_dark button-key_middle">
-    Tab
-  </button>
-  <button class="button-key">
-    Q
-  </button>
-  <button class="button-key">
-    <span class="button-key__text">W</span>
-  </button>
-  <button class="button-key">
-    E
-  </button>
-  <button class="button-key">
-    R
-  </button>
-  <button class="button-key">
-    T
-  </button>
-  <button class="button-key">
-    Y
-  </button>
-  <button class="button-key">
-    U
-  </button>
-  <button class="button-key">
-    I
-  </button>
-  <button class="button-key">
-    O
-  </button>
-  <button class="button-key">
-    P
-  </button>
-  <button class="button-key">
-    [
-  </button>
-  <button class="button-key">
-    ]
-  </button>
-  <button class="button-key">
-    <span class="button-key__up-name">/</span>
-    /
-  </button>
-  <button class="button-key button-key_theme_dark button-key_middle">
-    DEL
-  </button>
-  <button class="button-key button-key_theme_dark button-key_long">
-    Caps Lock
-  </button>
-  <button class="button-key">
-    A
-  </button>
-  <button class="button-key">
-    S
-  </button>
-  <button class="button-key">
-    D
-  </button>
-  <button class="button-key">
-    F
-  </button>
-  <button class="button-key">
-    G
-  </button>
-  <button class="button-key">
-    H
-  </button>
-  <button class="button-key">
-    J
-  </button>
-  <button class="button-key">
-    K
-  </button>
-  <button class="button-key">
-    L
-  </button>
-  <button class="button-key">
-    ;
-  </button>
-  <button class="button-key">
-    '
-  </button>
-  <button class="button-key button-key_theme_dark button-key_grow">
-    Enter
-  </button>
-  <button class="button-key button-key_theme_dark button-key_long">
-    Shift
-  </button>
-  <button class="button-key">
-    \
-  </button>
-  <button class="button-key">
-    Z
-  </button>
-  <button class="button-key">
-    X
-  </button>
-  <button class="button-key">
-    C
-  </button>
-  <button class="button-key">
-    V
-  </button>
-  <button class="button-key">
-    B
-  </button>
-  <button class="button-key">
-    N
-  </button>
-  <button class="button-key">
-    M
-  </button>
-  <button class="button-key">
-    .
-  </button>
-  <button class="button-key">
-    ,
-  </button>
-  <button class="button-key">
-    /
-  </button>
-  <button class="button-key button-key_theme_dark">
-    ⬆
-  </button>
-  <button class="button-key button-key_theme_dark">
-    Shift
-  </button>
-  <button class="button-key button-key_theme_dark button-key_grow">
-    Ctrl
-  </button>
-  <button class="button-key button-key_theme_dark">
-    Win
-  </button>
-  <button class="button-key button-key_theme_dark">
-    Alt
-  </button>
-  <button class="button-key button-key_space">
-    Space
-  </button>
-  <button class="button-key button-key_theme_dark">
-    Alt
-  </button>
-  <button class="button-key button-key_theme_dark button-key_grow">
-    Ctrl
-  </button>
-  <button class="button-key button-key_theme_dark">
-    ⬅
-  </button>
-  <button class="button-key button-key_theme_dark">
-    ⬇
-  </button>
-  <button class="button-key button-key_theme_dark">
-    ➡
-  </button>
-</div>
-<div class="description">
-  Press Ctrl + Shift for changing language!
-</div>
+<!--<textarea class="board__text-area"></textarea>-->
+<!--<div class="board__content">-->
+<!--  <button class="button-key button-key_theme_dark" id="Backquote">-->
+<!--    <span class="button-key__up-name">~</span>-->
+<!--    <span class="button-key__text">`</span>-->
+<!--  </button>-->
+<!--  <button class="button-key" id="Digit1">-->
+<!--    <span class="button-key__up-name">!</span>-->
+<!--    <span class="button-key__text">1</span>-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">@</span>-->
+<!--    2-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">#</span>-->
+<!--    3-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">$</span>-->
+<!--    4-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">%</span>-->
+<!--    5-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">:</span>-->
+<!--    6-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">?</span>-->
+<!--    7-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">*</span>-->
+<!--    8-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">(</span>-->
+<!--    9-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">)</span>-->
+<!--    0-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">_</span>-->
+<!--    - -->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">+</span>-->
+<!--    =-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_long">Backspace</button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_middle">-->
+<!--    Tab-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    Q-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__text">W</span>-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    E-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    R-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    T-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    Y-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    U-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    I-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    O-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    P-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    [-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    ]-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    <span class="button-key__up-name">/</span>-->
+<!--    /-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_middle">-->
+<!--    DEL-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_long">-->
+<!--    Caps Lock-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    A-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    S-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    D-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    F-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    G-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    H-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    J-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    K-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    L-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    ;-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    '-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_grow">-->
+<!--    Enter-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_long">-->
+<!--    Shift-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    \-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    Z-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    X-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    C-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    V-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    B-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    N-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    M-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    .-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    ,-->
+<!--  </button>-->
+<!--  <button class="button-key">-->
+<!--    /-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    ⬆-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    Shift-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_grow">-->
+<!--    Ctrl-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    Win-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    Alt-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_space">-->
+<!--    Space-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    Alt-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark button-key_grow">-->
+<!--    Ctrl-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    ⬅-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    ⬇-->
+<!--  </button>-->
+<!--  <button class="button-key button-key_theme_dark">-->
+<!--    ➡-->
+<!--  </button>-->
+<!--</div>-->
+<!--<div class="description">-->
+<!--  Press Ctrl + Shift for changing language!-->
+<!--</div>-->
 </body>
 </html>
