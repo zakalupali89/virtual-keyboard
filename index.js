@@ -63,6 +63,10 @@ description.innerText = 'Press Ctrl + Shift for changing language!\nKeyboard cre
 board.append(description);
 
 function addText(id, textInput, event) {
+  if (id === 'ShiftLeft' || id === 'ShiftRight' || id === 'AltLeft' || id === 'AltRight'
+    || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete' || id === 'CapsLock') {
+    return;
+  }
   const arrFromText = textArea.value.split('');
   const cursorPosition = textArea.selectionStart;
   const data = buttonsData?.[id];
@@ -70,7 +74,7 @@ function addText(id, textInput, event) {
     return;
   }
   let isUpperCase;
-  if (event.getModifierState('CapsLock')) {
+  if (isCapslockPressed || event.getModifierState('CapsLock')) {
     isUpperCase = !event.shiftKey;
   } else {
     isUpperCase = event.shiftKey;
@@ -86,7 +90,7 @@ function addText(id, textInput, event) {
   textArea.selectionEnd = textArea.selectionStart;
 }
 
-function pressSpecialKey(target, textInput, specialKey) {
+function pressSpecialKey(textInput, specialKey) {
   const input = textInput;
   const arrFromText = textArea.value.split('');
   const { selectionStart } = textArea;
@@ -158,13 +162,13 @@ boardContent.onmousedown = (event) => {
   if (target.tagName === 'BUTTON') {
     switch (target.id) {
       case 'Delete':
-        pressSpecialKey(target, textArea, 'Delete');
+        pressSpecialKey(textArea, 'Delete');
         break;
       case 'Backspace':
-        pressSpecialKey(target, textArea, 'Backspace');
+        pressSpecialKey(textArea, 'Backspace');
         break;
       case 'Enter':
-        pressSpecialKey(target, textArea, 'Enter');
+        pressSpecialKey(textArea, 'Enter');
         break;
       case 'CapsLock':
         toggleCapsLock();
@@ -190,7 +194,7 @@ document.onkeydown = (event) => {
   if (event.code === 'CapsLock') {
     toggleCapsLock(event);
   }
-  const { code, target } = event;
+  const { code } = event;
 
   if (code) {
     const buttonKey = document.getElementById(code);
@@ -201,7 +205,8 @@ document.onkeydown = (event) => {
     localStorage.setItem('language', language);
     rerenderButton();
   } else {
-    addText(target.id, textArea, event);
+    addText(event.code, textArea, event);
+    pressSpecialKey(textArea, event.code);
   }
 };
 
