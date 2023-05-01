@@ -13,12 +13,13 @@ board.append(boardContent);
 
 let isCapslockPressed = false;
 let language = localStorage.getItem('language') || 'en';
-
+const buttonsElements = [];
 function createButtons() {
   boardContent.innerText = '';
   const arrFromButtonsData = Object.entries(buttonsData);
   for (let i = 0; i < arrFromButtonsData.length; i += 1) {
     const button = document.createElement('button');
+    buttonsElements.push(button);
     const keyObject = arrFromButtonsData[i][0];
     button.id = keyObject;
     const data = buttonsData[keyObject];
@@ -26,13 +27,13 @@ function createButtons() {
     if (data[language][1] && !keyObject.includes('Key')) {
       const spanUpName = document.createElement('span');
       spanUpName.className = 'button-key__up-name';
-      const text = buttonsData[keyObject][language][1];
+      const [, text] = buttonsData[keyObject][language];
       spanUpName.innerText = text;
       button.append(spanUpName);
     }
     const spanText = document.createElement('span');
     spanText.className = 'button-key__text';
-    const text = buttonsData[keyObject][language][0];
+    const [text] = buttonsData[keyObject][language];
     spanText.innerText = text;
     button.append(spanText);
     boardContent.append(button);
@@ -40,6 +41,20 @@ function createButtons() {
 }
 
 createButtons();
+
+function rerenderButton() {
+  buttonsElements.forEach((item) => {
+    const { id, firstElementChild, lastElementChild } = item;
+    console.log(item.id);
+    const data = buttonsData[item.id];
+    if (data[language][1] && !id.includes('Key')) {
+      const [, text] = buttonsData[id][language];
+      firstElementChild.innerText = text;
+    }
+    const [text] = buttonsData[id][language];
+    lastElementChild.innerText = text;
+  });
+}
 
 const buttonCapsLock = boardContent.querySelector('#CapsLock');
 
@@ -174,7 +189,8 @@ document.onkeydown = (event) => {
   if (event.ctrlKey && event.shiftKey) {
     language = language === 'en' ? 'ru' : 'en';
     localStorage.setItem('language', language);
-    createButtons();
+    rerenderButton();
+    // createButtons();
   }
 };
 
