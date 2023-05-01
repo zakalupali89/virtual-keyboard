@@ -65,7 +65,7 @@ board.append(description);
 function addText(id, textInput, event) {
   if (id === 'ShiftLeft' || id === 'ShiftRight' || id === 'AltLeft' || id === 'AltRight'
     || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete'
-    || id === 'CapsLock' || id.includes('Arrow')) {
+    || id === 'CapsLock' || id.includes('Arrow') || id === 'Tab') {
     return;
   }
   const arrFromText = textArea.value.split('');
