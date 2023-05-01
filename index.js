@@ -64,7 +64,8 @@ board.append(description);
 
 function addText(id, textInput, event) {
   if (id === 'ShiftLeft' || id === 'ShiftRight' || id === 'AltLeft' || id === 'AltRight'
-    || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete' || id === 'CapsLock') {
+    || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete'
+    || id === 'CapsLock' || id.includes('Arrow')) {
     return;
   }
   const arrFromText = textArea.value.split('');
@@ -179,6 +180,11 @@ boardContent.onmousedown = (event) => {
           interval = setInterval(() => addText(target.id, textArea, event), 50);
         }, 500);
     }
+    if (target.id.includes('Arrow')) {
+      const newEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+      const button = buttonsElements.filter((item) => item.id === target.id)[0];
+      button.dispatchEvent(newEvent);
+    }
   }
 };
 
@@ -189,12 +195,14 @@ boardContent.onmouseup = () => {
 };
 
 document.onkeydown = (event) => {
-  event.preventDefault();
+  const { code } = event;
+  if (!code.includes('Arrow')) {
+    event.preventDefault();
+  }
   textArea.focus();
-  if (event.code === 'CapsLock') {
+  if (code === 'CapsLock') {
     toggleCapsLock(event);
   }
-  const { code } = event;
 
   if (code) {
     const buttonKey = document.getElementById(code);
