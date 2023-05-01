@@ -45,7 +45,6 @@ createButtons();
 function rerenderButton() {
   buttonsElements.forEach((item) => {
     const { id, firstElementChild, lastElementChild } = item;
-    console.log(item.id);
     const data = buttonsData[item.id];
     if (data[language][1] && !id.includes('Key')) {
       const [, text] = buttonsData[id][language];
@@ -66,7 +65,10 @@ board.append(description);
 function addText(id, textInput, event) {
   const arrFromText = textArea.value.split('');
   const cursorPosition = textArea.selectionStart;
-  const data = buttonsData[id];
+  const data = buttonsData?.[id];
+  if (!data) {
+    return;
+  }
   let isUpperCase;
   if (event.getModifierState('CapsLock')) {
     isUpperCase = !event.shiftKey;
@@ -140,8 +142,12 @@ function toggleCapsLock(event) {
       isCapslockPressed = false;
       buttonCapsLock.classList.remove('button-key_capslock');
     }
+  } else if (isCapslockPressed) {
+    isCapslockPressed = false;
+    buttonCapsLock.classList.remove('button-key_capslock');
   } else {
-    isCapslockPressed = !isCapslockPressed;
+    isCapslockPressed = true;
+    buttonCapsLock.classList.add('button-key_capslock');
   }
 }
 
@@ -161,7 +167,7 @@ boardContent.onmousedown = (event) => {
         pressSpecialKey(target, textArea, 'Enter');
         break;
       case 'CapsLock':
-        toggleCapsLock(event);
+        toggleCapsLock();
         break;
       default:
         addText(target.id, textArea, event);
@@ -179,9 +185,13 @@ boardContent.onmouseup = () => {
 };
 
 document.onkeydown = (event) => {
+  event.preventDefault();
   textArea.focus();
-  toggleCapsLock(event);
-  const { code } = event;
+  if (event.code === 'CapsLock') {
+    toggleCapsLock(event);
+  }
+  const { code, target } = event;
+
   if (code) {
     const buttonKey = document.getElementById(code);
     buttonKey.classList.add('active');
@@ -190,7 +200,8 @@ document.onkeydown = (event) => {
     language = language === 'en' ? 'ru' : 'en';
     localStorage.setItem('language', language);
     rerenderButton();
-    // createButtons();
+  } else {
+    addText(target.id, textArea, event);
   }
 };
 

@@ -1,5 +1,5 @@
 const buttonsData = {
-  Backquote: { en: ['`', '~'], ru: ['ё', 'Ё'], class: 'button-key_theme_dark' },
+  Backquote: { en: ['`', '~'], ru: ['Ё', 'ё'], class: 'button-key_theme_dark' },
   Digit1: { en: ['1', '!'], ru: ['1', '!'] },
   Digit2: { en: ['2', '@'], ru: ['2', '"'] },
   Digit3: { en: ['3', '#'], ru: ['3', '№'] },
