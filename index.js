@@ -26,12 +26,14 @@ function createButtons() {
     if (data[language][1] && !keyObject.includes('Key')) {
       const spanUpName = document.createElement('span');
       spanUpName.className = 'button-key__up-name';
-      spanUpName.innerText = buttonsData[keyObject][language][1];
+      const text = buttonsData[keyObject][language][1];
+      spanUpName.innerText = text;
       button.append(spanUpName);
     }
     const spanText = document.createElement('span');
     spanText.className = 'button-key__text';
-    spanText.innerText = buttonsData[keyObject][language][0];
+    const text = buttonsData[keyObject][language][0];
+    spanText.innerText = text;
     button.append(spanText);
     boardContent.append(button);
   }
@@ -51,16 +53,16 @@ function addText(id, textInput, event) {
   const cursorPosition = textArea.selectionStart;
   const data = buttonsData[id];
   let isUpperCase;
-  if (isCapslockPressed) {
+  if (event.getModifierState('CapsLock')) {
     isUpperCase = !event.shiftKey;
   } else {
     isUpperCase = event.shiftKey;
   }
   if (isUpperCase) {
-    arrFromText.splice(cursorPosition, 0, data.en[0]);
+    arrFromText.splice(cursorPosition, 0, data[language][0]);
     textArea.value = arrFromText.join('');
   } else {
-    arrFromText.splice(cursorPosition, 0, data.en[1]);
+    arrFromText.splice(cursorPosition, 0, data[language][1]);
     textArea.value = arrFromText.join('');
   }
   textArea.selectionStart = cursorPosition + 1;
@@ -68,6 +70,7 @@ function addText(id, textInput, event) {
 }
 
 function pressSpecialKey(target, textInput, specialKey) {
+  const input = textInput;
   const arrFromText = textArea.value.split('');
   const { selectionStart } = textArea;
   const { selectionEnd } = textArea;
@@ -75,46 +78,56 @@ function pressSpecialKey(target, textInput, specialKey) {
     case 'Delete':
       if (selectionStart === selectionEnd) {
         arrFromText.splice(selectionStart, 1);
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart;
       } else {
         arrFromText.splice(selectionStart, selectionEnd - selectionStart);
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart;
       }
       break;
     case 'Backspace':
       if (selectionStart === selectionEnd) {
         arrFromText.splice(selectionStart - 1, 1);
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart - 1;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart - 1;
       } else {
         arrFromText.splice(selectionStart, selectionEnd - selectionStart);
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart;
       }
       break;
     case 'Enter':
       if (selectionStart === selectionEnd) {
         arrFromText.splice(selectionStart, 0, '\n');
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart + 1;
-        textInput.selectionEnd = selectionStart + 1;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart + 1;
+        input.selectionEnd = selectionStart + 1;
       } else {
         arrFromText.splice(selectionStart, selectionEnd - selectionStart, '\n');
-        textInput.value = arrFromText.join('');
-        textInput.selectionStart = selectionStart + 1;
-        textInput.selectionEnd = selectionStart + 1;
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart + 1;
+        input.selectionEnd = selectionStart + 1;
       }
       break;
+    default:
+      break;
   }
-  textInput.selectionEnd = textInput.selectionStart;
+  input.selectionEnd = textInput.selectionStart;
 }
 
-function toggleCapsLock() {
-  isCapslockPressed = !isCapslockPressed;
-  buttonCapsLock.classList.toggle('button-key_capslock');
-  console.log(isCapslockPressed);
+function toggleCapsLock(event) {
+  if (event) {
+    if (event.getModifierState('CapsLock')) {
+      isCapslockPressed = true;
+      buttonCapsLock.classList.add('button-key_capslock');
+    } else {
+      isCapslockPressed = false;
+      buttonCapsLock.classList.remove('button-key_capslock');
+    }
+  } else {
+    isCapslockPressed = !isCapslockPressed;
+  }
 }
 
 let timer;
@@ -152,6 +165,7 @@ boardContent.onmouseup = () => {
 
 document.onkeydown = (event) => {
   textArea.focus();
+  toggleCapsLock(event);
   const { code } = event;
   if (code) {
     const buttonKey = document.getElementById(code);
