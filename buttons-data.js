@@ -58,7 +58,7 @@ const buttonsData = {
   ControlLeft: { en: ['Ctrl'], ru: ['Ctrl'], class: 'button-key_theme_dark button-key_grow' },
   OsLeft: { en: ['Win'], ru: ['Win'], class: 'button-key_theme_dark' },
   AltLeft: { en: ['Alt'], ru: ['Alt'], class: 'button-key_theme_dark' },
-  Space: { en: [''], ru: [''], class: 'button-key_space' },
+  Space: { en: [' '], ru: [' '], class: 'button-key_space' },
   AltRight: { en: ['Alt'], ru: ['Alt'], class: 'button-key_theme_dark' },
   ControlRight: { en: ['Ctrl'], ru: ['Ctrl'], class: 'button-key_theme_dark button-key_grow' },
   ArrowLeft: { en: ['⬅'], ru: ['⬅'], class: 'button-key_theme_dark' },

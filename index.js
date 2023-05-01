@@ -65,7 +65,7 @@ board.append(description);
 function addText(id, textInput, event) {
   if (id === 'ShiftLeft' || id === 'ShiftRight' || id === 'AltLeft' || id === 'AltRight'
     || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete'
-    || id === 'CapsLock' || id.includes('Arrow') || id === 'Tab') {
+    || id === 'CapsLock' || id.includes('Arrow') || id === 'Tab' || id === 'Space') {
     return;
   }
   const arrFromText = textArea.value.split('');
@@ -132,6 +132,19 @@ function pressSpecialKey(textInput, specialKey) {
         input.selectionEnd = selectionStart + 1;
       }
       break;
+    case 'Space':
+      if (selectionStart === selectionEnd) {
+        arrFromText.splice(selectionStart, 0, ' ');
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart + 1;
+        input.selectionEnd = selectionStart + 1;
+      } else {
+        arrFromText.splice(selectionStart, selectionEnd - selectionStart, ' ');
+        input.value = arrFromText.join('');
+        input.selectionStart = selectionStart + 1;
+        input.selectionEnd = selectionStart + 1;
+      }
+      break;
     default:
       break;
   }
@@ -173,6 +186,9 @@ boardContent.onmousedown = (event) => {
         break;
       case 'CapsLock':
         toggleCapsLock();
+        break;
+      case 'Space':
+        pressSpecialKey(textArea, 'Space');
         break;
       default:
         addText(target.id, textArea, event);
