@@ -34,7 +34,11 @@ function createButtons() {
     const spanText = document.createElement('span');
     spanText.className = 'button-key__text';
     const [text] = buttonsData[keyObject][language];
-    spanText.innerText = text;
+    if (keyObject.includes('Key') || keyObject === 'Backquote' || keyObject === 'Quote' || keyObject === 'Comma') {
+      spanText.innerText = text.toUpperCase();
+    } else {
+      spanText.innerText = text;
+    }
     button.append(spanText);
     boardContent.append(button);
   }
@@ -51,7 +55,11 @@ function rerenderButton() {
       firstElementChild.innerText = text;
     }
     const [text] = buttonsData[id][language];
-    lastElementChild.innerText = text;
+    if (id.includes('Key') || id === 'Backquote' || id === 'Quote' || id === 'Comma') {
+      lastElementChild.innerText = text.toUpperCase();
+    } else {
+      lastElementChild.innerText = text;
+    }
   });
 }
 
@@ -63,13 +71,13 @@ description.innerText = 'Press Ctrl + Shift for changing language!\nKeyboard cre
 board.append(description);
 
 function addText(id, textInput, event) {
-  if (id === 'ShiftLeft' || id === 'ShiftRight' || id === 'AltLeft' || id === 'AltRight'
-    || id === 'OsLeft' || id === 'Enter' || id === 'Backspace' || id === 'Delete'
-    || id === 'CapsLock' || id.includes('Arrow') || id === 'Tab' || id === 'Space') {
+  if (id.includes('Shift') || id.includes('Alt') || id === 'OsLeft'
+    || id === 'Enter' || id === 'Backspace' || id === 'Delete' || id === 'CapsLock'
+    || id.includes('Arrow') || id === 'Tab' || id === 'Space' || id.includes('Control')) {
     return;
   }
   const arrFromText = textArea.value.split('');
-  const cursorPosition = textArea.selectionStart;
+  const { selectionStart, selectionEnd } = textArea;
   const data = buttonsData?.[id];
   if (!data) {
     return;
@@ -80,14 +88,22 @@ function addText(id, textInput, event) {
   } else {
     isUpperCase = event.shiftKey;
   }
-  if (isUpperCase) {
-    arrFromText.splice(cursorPosition, 0, data[language][0]);
+  if (selectionStart === selectionEnd) {
+    if (isUpperCase) {
+      arrFromText.splice(selectionStart, 0, data[language][1]);
+      textArea.value = arrFromText.join('');
+    } else {
+      arrFromText.splice(selectionStart, 0, data[language][0]);
+      textArea.value = arrFromText.join('');
+    }
+  } else if (isUpperCase) {
+    arrFromText.splice(selectionStart, selectionEnd - selectionStart, data[language][1]);
     textArea.value = arrFromText.join('');
   } else {
-    arrFromText.splice(cursorPosition, 0, data[language][1]);
+    arrFromText.splice(selectionStart, selectionEnd - selectionStart, data[language][0]);
     textArea.value = arrFromText.join('');
   }
-  textArea.selectionStart = cursorPosition + 1;
+  textArea.selectionStart = selectionStart + 1;
   textArea.selectionEnd = textArea.selectionStart;
 }
 
