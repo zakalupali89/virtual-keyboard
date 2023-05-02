@@ -169,6 +169,33 @@ function toggleCapsLock(event) {
   }
 }
 
+function moveCursor(direction) {
+  const { selectionStart } = textArea;
+  const text = textArea.value;
+  if (direction === 'ArrowUp') {
+    const sliceText = text.slice(0, selectionStart);
+    const countNewLine = sliceText.split('\n').length - 1;
+    if (countNewLine) {
+      const lengthLastLine = sliceText.split('\n')?.at(-1).length;
+      let lengthPreLastLine = sliceText.split('\n')?.at(-2).length;
+      lengthPreLastLine = lengthPreLastLine < lengthLastLine ? lengthPreLastLine : lengthLastLine;
+      const newSelectionStart = [].concat(...sliceText.split('\n').slice(0, -2)).join('').length + lengthPreLastLine + countNewLine - 1;
+      textArea.selectionStart = newSelectionStart;
+      textArea.selectionEnd = newSelectionStart;
+    }
+  } else {
+    const sliceText = text.slice(selectionStart);
+    const countNewLine = sliceText.split('\n').length - 1;
+    if (countNewLine) {
+      const oldLineStart = text.slice(0, selectionStart).split('\n').at(-1).length;
+      const newLineStart = oldLineStart < sliceText.split('\n')?.[1].length ? oldLineStart : sliceText.split('\n')?.[1].length;
+      const newSelectionStart = text.slice(0, selectionStart).length + sliceText.split('\n')[0].length + newLineStart + 1;
+      textArea.selectionStart = newSelectionStart;
+      textArea.selectionEnd = newSelectionStart;
+    }
+  }
+}
+
 let timer;
 let interval;
 boardContent.onmousedown = (event) => {
@@ -190,6 +217,19 @@ boardContent.onmousedown = (event) => {
       case 'Space':
         pressSpecialKey(textArea, 'Space');
         break;
+      case 'ArrowLeft':
+        textArea.selectionStart -= 1;
+        textArea.selectionEnd -= 1;
+        break;
+      case 'ArrowRight':
+        textArea.selectionStart += 1;
+        break;
+      case 'ArrowUp':
+        moveCursor('ArrowUp');
+        break;
+      case 'ArrowDown':
+        moveCursor('ArrowDown');
+        break;
       default:
         addText(target.id, textArea, event);
         timer = setTimeout(() => {
@@ -198,8 +238,7 @@ boardContent.onmousedown = (event) => {
     }
     if (target.id.includes('Arrow')) {
       const newEvent = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-      const button = buttonsElements.filter((item) => item.id === target.id)[0];
-      button.dispatchEvent(newEvent);
+      textArea.dispatchEvent(newEvent);
     }
   }
 };
